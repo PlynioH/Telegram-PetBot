@@ -1,6 +1,6 @@
 # Trabalho de Graduação
 
-## Dependencias
+## Dependências
 
 - docker
 - docker-compose
