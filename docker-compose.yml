@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  db:
+    container_name: petbot_db
+    image: postgres:13
+    environment: 
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - ${DB_PORT}:5432
+
+  bot:
+    container_name: petbot_bot
+    build: .
+    volumes:
+      - .:/home/bot
+    environment:
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_URL: db
+      DB_PORT: ${DB_PORT}
+      TOKEN: ${TOKEN}
+    depends_on:
+      - "db"
